@@ -40,7 +40,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             StudyingComposeTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    conversation(SampleData.conversationSample)
+                    //conversation(SampleData.conversationSample)
+                    clickMe()
                 }
             }
         }
