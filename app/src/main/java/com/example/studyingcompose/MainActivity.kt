@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
             StudyingComposeTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     //conversation(SampleData.conversationSample)
-                    clickMe()
+                    myApp()
                 }
             }
         }
@@ -65,14 +65,14 @@ fun messageCard(msg: Message) {
 
         var isExpanded by remember { mutableStateOf(false) }
 
-        Column (modifier = Modifier.clickable { isExpanded = !isExpanded }){
+        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
             Text(
                 text = msg.author,
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Surface (shape = MaterialTheme.shapes.medium, shadowElevation = 20.dp){
+            Surface(shape = MaterialTheme.shapes.medium, shadowElevation = 20.dp) {
                 Text(
                     text = msg.body,
                     modifier = Modifier.padding(2.dp),
@@ -86,17 +86,17 @@ fun messageCard(msg: Message) {
 
 
 @Composable
-fun conversation(messages: List<Message>){
+fun conversation(messages: List<Message>) {
     LazyColumn {
-        items(messages){
-            message -> messageCard(message)
+        items(messages) { message ->
+            messageCard(message)
         }
     }
 }
 
 @Preview
 @Composable
-fun previewConversation(){
+fun previewConversation() {
     StudyingComposeTheme {
         conversation(SampleData.conversationSample)
     }
