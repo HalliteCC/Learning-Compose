@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
@@ -21,14 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MyApp(modifier: Modifier = Modifier){
+fun MyApp(modifier: Modifier = Modifier) {
 
     var shouldShowOnboarding by remember { mutableStateOf(true) }
 
-    Surface (modifier){
-        if(shouldShowOnboarding){
-            OnboardingScreen(onContinueCliecked = {shouldShowOnboarding = false})
-        }else {
+    Surface(modifier) {
+        if (shouldShowOnboarding) {
+            OnboardingScreen(onContinueCliecked = { shouldShowOnboarding = false })
+        } else {
             Greatings()
         }
     }
@@ -48,8 +50,9 @@ fun OnboardingScreen(
         Text("Welcome to the Basic Codelab!")
         Button(
             modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueCliecked)
-            {
+            onClick = onContinueCliecked
+        )
+        {
             Text("Continue")
         }
     }
@@ -59,12 +62,12 @@ fun OnboardingScreen(
 @Composable
 fun Greatings(
     modifier: Modifier = Modifier,
-    names: List<String> = listOf("World", "Compose")
+    names: List<String> = List(1000) { "$it" }
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier.padding(vertical = 4.dp)
     ) {
-        for (name in names) {
+        items(items = names) { name ->
             greeting(name = name)
         }
     }
@@ -82,7 +85,10 @@ fun greeting(name: String, modifier: Modifier = Modifier) {
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
-                modifier = Modifier.weight(1f).padding(bottom = extraPadding)) {
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+            ) {
                 Text("Hello")
                 Text(name)
             }
